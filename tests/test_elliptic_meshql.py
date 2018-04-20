@@ -1,25 +1,37 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+from typing import Type
 
-"""Tests for `elliptic_meshql` package."""
+from elliptic.Kernel.Context import ContextDelegate
 
-import pytest
-
-
-from elliptic_meshql import elliptic_meshql
-
-
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+from elliptic_meshql.Computer import ComputerImplementationBase
+from elliptic_meshql.Manager import ManagerImplementationBase
+from elliptic_meshql.MeshQL import MeshQLContract
+from elliptic_meshql.Selector import SelectorImplementationBase
 
 
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+class MeshQLImplementationBase(ComputerImplementationBase, ManagerImplementationBase, SelectorImplementationBase):
+    def map_delegate(self, fun) -> Type[ContextDelegate]:
+        pass
+
+    def reduce_delegate(self, fun) -> Type[ContextDelegate]:
+        pass
+
+    def solve_delegate(self) -> Type[ContextDelegate]:
+        pass
+
+    def store_delegate(self) -> Type[ContextDelegate]:
+        pass
+
+    def by_ent_delegate(self, dim: int) -> Type[ContextDelegate]:
+        pass
+
+    def by_adj_delegate(self, bridge_dim: int, to_dim: int) -> Type[ContextDelegate]:
+        pass
+
+    def base_delegate(self) -> Type[ContextDelegate]:
+        pass
+
+
+def test_meshql_interface():
+    root = MeshQLContract(MeshQLImplementationBase())
+
+    root.Base().ByEnt(3).ByAdj(2, 3).Map(None).Reduce(None).Solve().Store()
