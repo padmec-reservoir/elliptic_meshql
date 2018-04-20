@@ -1,30 +1,24 @@
 language: python
-
 python:
 - 3.6
-
 install: python setup.py install
-
 script: python setup.py test
-
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: gpkc
   password:
-    secure: qOd9hZ1ZsXP8RFIHo/OM/Je6NepUiQ09LtGA9V6+KqMDmQ5TWYMXKfvyRQfoSeQPHgBcJlY5b2wkqxf/w8pEuYqEApLikY4f94RxkKEScrYY1fRLNkHtjkUZ/rE5sukt98yapU8Vo/ZA9Q/qVHab4355j3uyC6J50YZFBaRTUtaKFr5BGgbj3cNvB4iJHZ9lA0TgYBDYzTPQWD+RXjkOyZXXNaATMTySG4vR+cNmboGhoGsgtfiIdq/qfAAZ8GyVDymbKUIvn3VNOWncyro/amDIrMJjB989gzcogq9WgqoHAdb9Xa+QvwvdZvBD8it8QERPlRvZDFXKWt8Gwzep5zjWAOb5GHsGjroCc0hWkBFu8SVNigYT7oBTpPVkRf15dL8RM4JjtZ9q4GMdWiW0u4Gq0ghOpZKOxiQinhsHAvgCIfQp+Ht6ebkGnUEnO7N9+pFx63l+dmJY+uo4NZu0Gq8PpQz/oASgfsLDU4v4w52FA7wVuNWp0unhT0YzhsFZiohBMP9KiUk2nqSsA4OKw2PKyqclsJuzEw/oGqRz12T1s9Hf1qkyQnw5yOhq2mvKxxFJWWTaaZZPKk0TKV+AE24Iee033cQS0vJ/shmaSF5nreETNRfvaY/iljA9X5Su85jKURpzl0APiHojILATYbNipKr1dysL2req/aMVOO8=
+    secure: T93f4e6ixdXhq4mqKHXY2pVRy8bPmKdnaTujHrGuH/yMaAV2p5/B+KzXwrLWzM0rtUwICm4WztC9RiOUzpZAoUUlrfqSzb5MIe1kTdCR1awzkcgpZESB1LAJias5VmAoN3AqOWepXlXSy8U/1JV2kMv910hGP6mUXq4Yf+hYER9fISy/l2OJmhMY2Zi2ynvBOlZ1Kp8O/LP8TmG1l5avYK0NU0wjmlRlH71GOGuVvWxdgFbCqY9X2gfBM4KouOSDeqNqUCGKsMgFaBT3+vceMQrjL/Q0rAjOW6NGQNMb2aINCb9eQV+uzPOl0LIokPr4V/fFL3WsVouJjmOKEpdMJBOxjwxrQHl70DxMi0EjIw5jXsONziSn9uxxqgULt2SAJtdTCW4UD0DqjZJTk9JvYCl6riHEueMLh+lgD8eArHJrBPBcnUVv8m8R57eNtHPlSX8kGdLWcKrYlSADLn7eQt7XQgAbFilttKGmICDTGdh2e2NQhsjrii171sMykh233b3GciZYGcF4bg45w7wRTfzEFMRExsAaFbMiRdH66IkBOp4r5aG5kFKJb1l7jlMT2OujvMilyJOMH/ktkAj6Iy1nCQxi9dNLOYAsAbHiy5Ma+fT51vkyW3Zg6kn0R8F5qrvyY9OZRF33CVangY6L++BmFQ6rmsAJWz9uNynwx4o=
   on:
     tags: true
     repo: padmec-reservoir/elliptic_meshql
     python: 3.6
-
 after_success:
 - coveralls
 - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
 - chmod +x send.sh
-- ./send.sh success $WEBHOOK_URL
-
+- "./send.sh success $WEBHOOK_URL"
 after_failure:
 - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
 - chmod +x send.sh
-- ./send.sh failure $WEBHOOK_URL
+- "./send.sh failure $WEBHOOK_URL"
