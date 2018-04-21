@@ -10,9 +10,10 @@ class MeshQLFunction:
     """MeshQL function. If builtin is set to True, should be an internal function.
     """
 
-    def __init__(self, fun, builtin=False):
+    def __init__(self, fun, builtin=False, **kwargs):
         self.fun = fun
         self.builtin = builtin
+        self.fargs = kwargs
 
 
 class ComputerImplementationBase(DSLImplementation):
