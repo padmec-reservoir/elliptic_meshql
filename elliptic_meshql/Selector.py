@@ -16,6 +16,10 @@ class SelectorImplementationBase(DSLImplementation):
     def by_adj_delegate(self, bridge_dim: int, to_dim: int) -> Type[ContextDelegate]:
         raise NotImplementedError
 
+    @abstractmethod
+    def where_delegate(self, conditions):
+        raise NotImplementedError
+
 
 class SelectorContract(DSLContract[SelectorImplementationBase]):
 
@@ -24,3 +28,6 @@ class SelectorContract(DSLContract[SelectorImplementationBase]):
 
     def ByAdj(self, bridge_dim: int, to_dim: int) -> 'SelectorContract':
         return self.append_tree(Expression(self.dsl_impl.by_adj_delegate(bridge_dim, to_dim), "ByAdj"))
+
+    def Where(self, **conditions):
+        return self.append_tree(Expression(self.dsl_impl.where_delegate(conditions), "Where"))

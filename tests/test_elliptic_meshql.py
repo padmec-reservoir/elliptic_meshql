@@ -34,4 +34,4 @@ class MeshQLImplementationBase(ComputerImplementationBase, ManagerImplementation
 def test_meshql_interface():
     root = MeshQLContract(MeshQLImplementationBase())
 
-    root.Base().ByEnt(3).ByAdj(2, 3).Map(None).Reduce(None).Solve().Store()
+    root.Base().ByEnt(3).ByAdj(2, 3).Where(cond=True).Map(None).Reduce(None).Solve().Store()
