@@ -9,6 +9,9 @@ from elliptic_meshql.Selector import SelectorImplementationBase
 
 
 class MeshQLImplementationBase(ComputerImplementationBase, ManagerImplementationBase, SelectorImplementationBase):
+    def where_delegate(self, conditions):
+        pass
+
     def map_delegate(self, fun) -> Type[ContextDelegate]:
         pass
 
