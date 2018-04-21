@@ -4,4 +4,4 @@
 
 __author__ = """Guilherme Caminha"""
 __email__ = 'gpkc@cin.ufpe.br'
-__version__ = '__version__ = '__version__ = '0.2.0'''
+__version__ = '0.2.0'
