@@ -13,7 +13,7 @@ class ManagerImplementationBase(DSLImplementation):
         raise NotImplementedError
 
     @abstractmethod
-    def store_delegate(self) -> Type[ContextDelegate]:
+    def store_delegate(self, field_name) -> Type[ContextDelegate]:
         raise NotImplementedError
 
 
@@ -22,5 +22,9 @@ class ManagerContract(DSLContract[ManagerImplementationBase]):
     def Solve(self) -> 'ManagerContract':
         return self.append_tree(Expression(self.dsl_impl.solve_delegate(), "Solve"))
 
-    def Store(self) -> 'ManagerContract':
-        return self.append_tree(Expression(self.dsl_impl.store_delegate(), "Store"))
+    def Store(self, field_name) -> 'ManagerContract':
+        return self.append_tree(
+            Expression(
+                self.dsl_impl.store_delegate(field_name),
+                "Store",
+                {'field': field_name}))

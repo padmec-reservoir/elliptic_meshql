@@ -30,7 +30,15 @@ class ComputerImplementationBase(DSLImplementation):
 class ComputerContract(DSLContract[ComputerImplementationBase]):
 
     def Map(self, fun: MeshQLFunction) -> 'ComputerContract':
-        return self.append_tree(Expression(self.dsl_impl.map_delegate(fun), "Map"))
+        return self.append_tree(
+            Expression(
+                self.dsl_impl.map_delegate(fun),
+                "Map",
+                {fun.fun: fun.fargs}))
 
     def Reduce(self, fun: MeshQLFunction) -> 'ComputerContract':
-        return self.append_tree(Expression(self.dsl_impl.reduce_delegate(fun), "Reduce"))
+        return self.append_tree(
+            Expression(
+                self.dsl_impl.reduce_delegate(fun),
+                "Reduce",
+                {fun.fun: fun.fargs}))

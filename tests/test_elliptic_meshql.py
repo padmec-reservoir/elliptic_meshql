@@ -4,7 +4,9 @@ from elliptic.Kernel.Context import ContextDelegate
 
 from elliptic_meshql.Computer import ComputerImplementationBase
 from elliptic_meshql.Manager import ManagerImplementationBase
+from elliptic_meshql.MapFunctions import GetField
 from elliptic_meshql.MeshQL import MeshQLContract
+from elliptic_meshql.ReduceFunctions import Sum
 from elliptic_meshql.Selector import SelectorImplementationBase
 
 
@@ -21,7 +23,7 @@ class MeshQLImplementationBase(ComputerImplementationBase, ManagerImplementation
     def solve_delegate(self) -> Type[ContextDelegate]:
         pass
 
-    def store_delegate(self) -> Type[ContextDelegate]:
+    def store_delegate(self, field_name) -> Type[ContextDelegate]:
         pass
 
     def by_ent_delegate(self, dim: int) -> Type[ContextDelegate]:
@@ -37,4 +39,11 @@ class MeshQLImplementationBase(ComputerImplementationBase, ManagerImplementation
 def test_meshql_interface():
     root = MeshQLContract(MeshQLImplementationBase())
 
-    root.Base().ByEnt(3).ByAdj(2, 3).Where(cond=True).Map(None).Reduce(None).Solve().Store()
+    root.Base().\
+        ByEnt(3).\
+        ByAdj(2, 3).\
+        Where(cond=True).\
+        Map(GetField("field")).\
+        Reduce(Sum(0.0)).\
+        Solve().\
+        Store("field")

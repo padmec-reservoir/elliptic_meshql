@@ -24,10 +24,18 @@ class SelectorImplementationBase(DSLImplementation):
 class SelectorContract(DSLContract[SelectorImplementationBase]):
 
     def ByEnt(self, dim: int) -> 'SelectorContract':
-        return self.append_tree(Expression(self.dsl_impl.by_ent_delegate(dim), "ByEnt"))
+        return self.append_tree(
+            Expression(
+                self.dsl_impl.by_ent_delegate(dim),
+                "ByEnt",
+                {'dim': dim}))
 
     def ByAdj(self, bridge_dim: int, to_dim: int) -> 'SelectorContract':
-        return self.append_tree(Expression(self.dsl_impl.by_adj_delegate(bridge_dim, to_dim), "ByAdj"))
+        return self.append_tree(
+            Expression(
+                self.dsl_impl.by_adj_delegate(bridge_dim, to_dim),
+                "ByAdj",
+                {'bridge_dim': bridge_dim, 'to_dim': to_dim}))
 
     def Where(self, **conditions):
         return self.append_tree(Expression(self.dsl_impl.where_delegate(conditions), "Where"))
