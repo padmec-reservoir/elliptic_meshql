@@ -10,4 +10,4 @@ class SetScalar(MeshQLFunction):
 class GetField(MeshQLFunction):
 
     def __init__(self, field_name):
-        super().__init__('set_scalar', builtin=True, field_name=field_name)
+        super().__init__('get_field', builtin=True, field_name=field_name)
